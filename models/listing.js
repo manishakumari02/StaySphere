@@ -9,8 +9,8 @@ const listingSchema=new Schema({
     description:String,
     image:{
         type:String,
-        default:"https://unsplash.com/photos/airplane-wing-and-clouds-seen-from-a-window-ezyImh0IxOU",
-        set: (v)=>v===""?"https://unsplash.com/photos/airplane-wing-and-clouds-seen-from-a-window-ezyImh0IxOU":v,   //if user does not enter image then show default
+        default:"https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+        set: (v)=>v===""?"https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80":v,   //if user does not enter image then show default
     },
     price:Number,
     location:String,
