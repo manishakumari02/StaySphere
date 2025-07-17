@@ -9,7 +9,7 @@ const session=require("express-session");
 const flash=require("connect-flash");
 const passport=require("passport");
 const LocalStrategy=require("passport-local");
-const User=require("./model/user.js");
+const User=require("./models/user.js");
 
 const listings=require("./routes/listing.js");
 const reviews=require("./routes/review.js");
@@ -63,6 +63,15 @@ app.use((req,res,next)=>{
     // console.log(res.locals.success); //success is array
     res.locals.error=req.flash("error");
     next();
+})
+//ceating demo user and save in db
+app.get("/demouser",async(req,res)=>{
+    let fakeUser=new User({
+        email:"kumarimanisha2682@gmail.com",
+        username:"Mani",
+    })
+    let registeredUser=await User.register(fakeUser,"helloworld");
+    res.send(registeredUser);
 })
 
 
