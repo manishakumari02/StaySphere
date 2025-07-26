@@ -31,8 +31,15 @@ module.exports.updateListing=async (req, res) => {
     //     throw new ExpressError(404,"send valid data for listing");
     // }
     let { id } = req.params;
-    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
-     req.flash("success","listing updated!");
+    let listing=await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    if(typeof req.file!="undefined"){
+        let url=req.file.path;
+        let filename=req.file.filename;
+        listing.image={url,filename};
+        await listing.save();
+    }
+    
+    req.flash("success","listing updated!");
     res.redirect(`/listings/${id}`);
 }
 module.exports.destroyListing=async (req, res) => {
