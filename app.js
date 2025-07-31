@@ -25,7 +25,8 @@ const userRouter=require("./routes/user.js");
 
 
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const MONGO_URL = `mongodb+srv://kumarimanisha2682:kumarimanisha2682@cluster0.07mis.mongodb.net/`;
 main().then((res) => {
     console.log("connected mongo db");
 }).catch((err) => {
