@@ -68,8 +68,8 @@ const sessionOptions={
     },
 }
 // app.get("/", (req, res) => {
-//     res.send("Hi i am root path");
-// })
+//     res.send("Server is working!");
+// });
 
 
 app.use(session(sessionOptions));
@@ -88,6 +88,10 @@ app.use((req,res,next)=>{
     res.locals.currUser=req.user;
     next();
 })
+
+app.get("/", (req, res) => {
+    res.send("Server is working!");
+});
 //ceating demo user and save in db
 app.get("/demouser",async(req,res)=>{
     let fakeUser=new User({
