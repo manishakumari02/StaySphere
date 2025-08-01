@@ -17,6 +17,7 @@ const flash=require("connect-flash");
 const passport=require("passport");
 const LocalStrategy=require("passport-local");
 const User=require("./models/user.js");
+const Listing = require("./models/listing");
 
 
 
@@ -89,9 +90,11 @@ app.use((req,res,next)=>{
     next();
 })
 
-app.get("/", (req, res) => {
-    res.send("Server is working!");
+app.get("/", async (req, res) => {
+    const allListings = await Listing.find({});
+    res.render("listings/index", { allListings });
 });
+
 //ceating demo user and save in db
 app.get("/demouser",async(req,res)=>{
     let fakeUser=new User({
