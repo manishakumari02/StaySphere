@@ -15,7 +15,7 @@ module.exports.showListing=async (req, res) => {
         return res.redirect("/listings");
     }
     console.log(listing);
-    res.render("listings/show", { listing });
+    res.render("listings/show", { listing,currUser: req.user });
 }
 module.exports.renderEditForm=async (req, res) => {
     let { id } = req.params;
