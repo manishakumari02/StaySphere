@@ -1,130 +1,157 @@
-<% layout("layouts/boilerplate")%>
+<% layout("layouts/boilerplate") %>
 
-    <body>
+<body>
+  <style>
+    #filters {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 1.5rem;
+      padding: 1rem;
+      border-bottom: 1px solid #ccc;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      align-items: center;
+    }
 
-        <!-- <h3>All Listings</h3> -->
-        <!-- <form method="get" action="/listings/new">
-        <button>create New Listing</button>
-    </form> -->
-        <style>
-            .filter {
-                /* margin-top: 1rem; */
-                text-align: center;
-                margin-right: 2rem;
-                margin-top: 2rem;
-                opacity: 0.7;
-            }
+    #filters::-webkit-scrollbar {
+      display: none;
+    }
 
-            .filter:hover {
-                opacity: 1;
-                cursor: pointer;
-            }
+    .filter {
+      text-align: center;
+      flex: 0 0 auto;
+      color: #333;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+      min-width: 70px;
+    }
 
-            #filters {
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-            }
+    .filter:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
 
-            .filter p {
-                font-size: 0.8rem;
-            }
+    .filter i {
+      font-size: 1.6rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
 
-            .tax-info {
-                display: none;
-            }
-            .tax-toggle{
-                border: 1px solid black;
-                border-radius: 1rem;
-                height: 3.25rem;
-                padding: 1rem;
-                margin-left: 5rem;
-                display: flex;
-                align-items: center;
-            }
-        </style>
-        <div id="filters">
-            <div class="filter">
-                <div><i class="fa-solid fa-fire"></i></div>
-                <p>Trending</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-bed"></i></div>
-                <p>Room</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-mountain-city"></i></div>
-                <p>Iconic Cities</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-mountain"></i></div>
-                <p>Mountain</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-brands fa-fort-awesome"></i></div>
-                <p>Castles</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-snowflake"></i></div>
-                <p>Arctic</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-campground"></i></div>
-                <p>Camping</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-cow"></i></div>
-                <p>Farms</p>
-            </div>
-              <div class="filter">
-                <div><i class="fa-solid fa-igloo"></i></div>
-                <p>Domes</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-ship"></i></div>
-                <p>Boats</p>
-            </div>
-            <div class="tax-toggle">
-                <div class="form-check-reverse form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-                    <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
-                </div>
-            </div>
+    .filter p {
+      font-size: 0.75rem;
+      margin: 0;
+    }
+
+    .tax-toggle {
+      flex: 0 0 auto;
+      border: 1px solid #aaa;
+      border-radius: 1rem;
+      height: 3.25rem;
+      padding: 0.5rem 1rem;
+      margin-left: auto;
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .tax-info {
+      display: none;
+    }
+
+    @media (max-width: 576px) {
+      .filter i {
+        font-size: 1.3rem;
+      }
+
+      .filter p {
+        font-size: 0.65rem;
+      }
+
+      .tax-toggle {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.75rem;
+      }
+    }
+  </style>
+
+  <div id="filters">
+    <div class="filter">
+      <i class="fa-solid fa-fire"></i>
+      <p>Trending</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-bed"></i>
+      <p>Room</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-mountain-city"></i>
+      <p>Iconic Cities</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-mountain"></i>
+      <p>Mountain</p>
+    </div>
+    <div class="filter">
+      <i class="fa-brands fa-fort-awesome"></i>
+      <p>Castles</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-snowflake"></i>
+      <p>Arctic</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-campground"></i>
+      <p>Camping</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-cow"></i>
+      <p>Farms</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-igloo"></i>
+      <p>Domes</p>
+    </div>
+    <div class="filter">
+      <i class="fa-solid fa-ship"></i>
+      <p>Boats</p>
+    </div>
+
+    <div class="tax-toggle">
+      <div class="form-check-reverse form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+        <label class="form-check-label" for="switchCheckDefault">Show tax</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Listings Grid -->
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+    <% for(let listing of allListings) { %>
+      <a href="/listings/<%=listing._id%>" class="listing-link text-decoration-none text-dark">
+        <div class="card col listing-card mb-4 shadow-sm">
+          <img src="<%=listing.image.url%>" class="card-img-top" alt="listing image" style="height: 20rem; object-fit: cover;" />
+          <div class="card-body">
+            <p class="card-text">
+              <b><%=listing.title%></b><br>
+              ₹<%=listing.price.toLocaleString("en-IN")%>/night
+              <i class="tax-info">&nbsp;&nbsp;+18% GST</i>
+            </p>
+          </div>
         </div>
-        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
-            <% for(let listing of allListings) { %>
-                <a href="/listings/<%=listing._id%>" class="listing-link">
-                    <div class="card col listing-card">
-                        <img src="<%=listing.image.url%>" class="card-img-top" alt="listing image"
-                            style="height: 20rem;" />
-                        <div class="card-img-overlay"></div>
-                        <div class="card-body">
-                            <p class="card-text"><b>
-                                    <%=listing.title%>
-                                </b><br>
-                                &#8377;<%=listing.price.toLocaleString("en-IN")%>/night
-                                    <i class="tax-info">&nbsp;&nbsp;+18% GST</i></p>
+      </a>
+    <% } %>
+  </div>
 
-                        </div>
-                    </div>
-                </a>
-                <% } %>
-
-        </div>
-        <script>
-            let taxSwitch = document.getElementById("switchCheckDefault");
-            taxSwitch.addEventListener("click", () => {
-                let taxInfo = document.getElementsByClassName("tax-info");
-                for (info of taxInfo) {
-                    if (info.style.display != "inline") {
-                        info.style.display = "inline";
-                    }
-                    else {
-                        info.style.display = "none";
-                    }
-
-                }
-            })
-        </script>
-
-    </body>
+  <!-- Tax Toggle Script -->
+  <script>
+    const taxSwitch = document.getElementById("switchCheckDefault");
+    taxSwitch.addEventListener("click", () => {
+      const taxInfos = document.querySelectorAll(".tax-info");
+      taxInfos.forEach(info => {
+        info.style.display = (info.style.display !== "inline") ? "inline" : "none";
+      });
+    });
+  </script>
+</body>
